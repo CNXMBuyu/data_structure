@@ -23,19 +23,29 @@ public class InsertionSort {
 
     /**
      * 排序
+     * <pre>
+     *     优化点：
+     *     1. 如果待排序的元素大于有序区的最大元素则直接在尾部插入
+     *     2. 等已排序区间的元素都移动好位置，再将元素插入指定位置，减少赋值操作
+     * </pre>
      *
      * @param content
      */
     public static int[] sort(int[] content) {
         for (int i = 0; i < content.length; i++) {
             int temp = content[i];
-            // 在有序的数组中找到合适的位置，将其插入
-            for (int j = i - 1; j >= 0; j--) {
+            // 优化点2：记录待插入的位置
+            int j = i - 1;
+            for (; j >= 0; j--) {
                 if (content[j] > temp) {
                     content[j + 1] = content[j];
-                    content[j] = temp;
+                } else {
+                    // 优化点1：如果待排序的元素大于有序区的最大元素则直接在尾部插入
+                    break;
                 }
             }
+            // 优化点2：将元素插入指定位置，减少赋值操作
+            content[j + 1] = temp;
         }
         return content;
     }
