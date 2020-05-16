@@ -1,16 +1,16 @@
 package cn.hgy.data.algorithm;
 
 /**
- * 冒泡排序
+ * 插入排序
  * <pre>
- *     算法介绍：每次遍历选出最大的数添加到合适的位置
- *     时间复杂度：最优-O(n)，最坏-O(n^2),
+ *     算法介绍：每次从未排序中选择第一个数添加到已排序的合适位置
+ *     时间复杂度：最优O(n)，最坏O(n^2)
  * </pre>
  *
  * @author guoyu.huang
  * @version 1.0.0
  */
-public class BubbleSort {
+public class InsertionSort {
 
     public static void main(String[] args) {
         int[] arrays = {4, 5, 6, 3, 2, 1};
@@ -27,26 +27,18 @@ public class BubbleSort {
      * @param content
      */
     public static int[] sort(int[] content) {
-        // 替换标识，判断是否为最好情况
-        boolean swapFlag = false;
         for (int i = 0; i < content.length; i++) {
-            // 每一轮排序，数组尾部都是合适的值
-            for (int j = 0; j < content.length - i - 1; j++) {
-                if (content[j] > content[j + 1]) {
-                    swapFlag = true;
-                    int temp = content[j + 1];
+            int temp = content[i];
+            // 在有序的数组中找到合适的位置，将其插入
+            for (int j = i - 1; j >= 0; j--) {
+                if (content[j] > temp) {
                     content[j + 1] = content[j];
                     content[j] = temp;
                 }
-            }
-
-            if (swapFlag) {
-                swapFlag = false;
-            } else {
-                break;
             }
         }
         return content;
     }
 
 }
+
