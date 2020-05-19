@@ -10,7 +10,6 @@ public class MergeSort {
 
     public static void main(String[] args) {
         int[] arrays = {11, 8, 3, 9, 7, 1, 2, 5};
-//        merge(arrays, 0, 4, 7);
         sort(arrays, 0, arrays.length - 1);
         for (int i = 0; i < arrays.length; i++) {
             System.out.print(arrays[i] + " ");
@@ -35,10 +34,11 @@ public class MergeSort {
      * @param end
      */
     public static void merge(int[] content, int start, int mid, int end) {
-        int p1 = start, p2 = mid;
-        int[] temp = new int[content.length];
+
+        int p1 = start, p2 = mid + 1;
+        int[] temp = new int[end - start + 1];
         int i = 0;
-        while (p1 < mid && p2 < end) {
+        while (p1 <= mid && p2 <= end) {
             if (content[p1] < content[p2]) {
                 temp[i] = content[p1];
                 p1++;
@@ -49,25 +49,19 @@ public class MergeSort {
             i++;
         }
 
-        if (p1 < mid) {
-            for (; i < content.length; i++) {
-                temp[i] = content[p1];
-                p1++;
-            }
+        for (; p1 <= mid; p1++) {
+            temp[i] = content[p1];
+            i++;
         }
 
-        if (p2 < end) {
-            for (; i < content.length; i++) {
-                temp[i] = content[p2];
-                p2++;
-            }
+        for (; p2 <= end; p2++) {
+            temp[i] = content[p2];
+            i++;
         }
 
-       for(int j=0;j<temp.length;j++){
-           content[j] = temp[j];
-       }
-
-
+        for (int j = start; j <= end; j++) {
+            content[j] = temp[j - start];
+        }
     }
 
 }
