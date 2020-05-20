@@ -1,4 +1,4 @@
-package cn.hgy.data.algorithm;
+package cn.hgy.data.algorithm.lesson2;
 
 /**
  * 归并排序
