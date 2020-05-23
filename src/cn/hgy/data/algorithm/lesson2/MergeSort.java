@@ -3,7 +3,10 @@ package cn.hgy.data.algorithm.lesson2;
 /**
  * 归并排序
  * <pre>
- *     算法介绍：将待排序数组进行分组，分组的最终目标是两个元素一组；将每个分组的元素排序，再合并
+ *     算法介绍：
+ *     1. 先把数组从中间分成前后两部分{@link #sort(int[], int, int)}
+ *     2. 对前后两部分分别排序，再将排好序的两部分合并在一起{@link #merge(int[], int, int, int)}}
+ *     3. 当数组只有1个元素时，表示该数组已经排好序
  * </pre>
  *
  * @author guoyu.huang
@@ -27,7 +30,7 @@ public class MergeSort {
      * @param r
      */
     public static void sort(int[] content, int p, int r) {
-        // 递归停止条件，表示这时候元素集合最小单位是2个
+        // 递归停止条件: p>=r，表示这时候元素集合最小单位是2个
         if (p < r) {
             int mid = (p + r) / 2;
             sort(content, p, mid);
@@ -85,34 +88,7 @@ public class MergeSort {
      * @param r
      */
     public static void mergeWithSentinel(int[] content, int p, int mid, int r) {
-        // 因为归并排序合并时，是两个元素集合进行合并，所以需要两个指针下标
-        // p2指针为第二个元素的下标，所以是mid+1
-        // 例如元素集合（11 8），那么第一个元素集合下标就是0，第二个就是1，以此类推
-        int p1 = p, p2 = mid + 1;
-        // 申请一个临时数组，用于暂存有序集合
-        int[] temp = new int[r - p + 1];
-        int i = 0;
-        while (p1 <= mid && p2 <= r) {
-            if (content[p1] < content[p2]) {
-                temp[i++] = content[p1++];
-            } else {
-                temp[i++] = content[p2++];
-            }
-        }
-
-        // 当存在其中一个元素集合为空的时候，直接将另一个元素集合的元素追加在尾部
-        while (p1 <= mid) {
-            temp[i++] = content[p1++];
-        }
-
-        while (p2 <= r) {
-            temp[i++] = content[p2++];
-        }
-
-        // 将有序部分进行替换
-        for (int j = p; j <= r; j++) {
-            content[j] = temp[j - p];
-        }
+      // TODO
     }
 
 }
